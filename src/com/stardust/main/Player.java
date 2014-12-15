@@ -10,7 +10,7 @@ public class Player
     public int hp, sp, atk, def, spd, lvl, exp, next;
     
     public static final int SPEED = 2;
-    public static int lastLook = 0;
+    public static int lastLook = 3;
     
     private BufferedImage image;
     

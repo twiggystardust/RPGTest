@@ -1,8 +1,5 @@
 package com.stardust.main;
 
-import java.awt.event.KeyEvent;
-import java.sql.Time;
-
 public class Movement 
 {
     Long now = 0L;
@@ -29,21 +26,25 @@ public class Movement
             if(Input.up)
             {
                 Game.mapY += Player.SPEED;
+                Game.npcY += Player.SPEED;
                 Player.lastLook = 0;
             }
             if(Input.dn)
             {
                 Game.mapY -= Player.SPEED;
+                Game.npcY -= Player.SPEED;
                 Player.lastLook = 1;
             }
             if(Input.lt)
             {
                 Game.mapX += Player.SPEED;
+                Game.npcX += Player.SPEED;
                 Player.lastLook = 2;
             }
             if(Input.rt)
             {
                 Game.mapX -= Player.SPEED;
+                Game.npcX -= Player.SPEED;
                 Player.lastLook = 3;
             }
         }

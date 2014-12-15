@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 public class Assets 
 {
      public ImageLoader loader;
-     public static SpriteSheet sheet, playerSheet, menuSheet, itemSheet, skillSheet, equipSheet, statusSheet;
-     private BufferedImage tileImage, playerImage, menuImage, itemImage, skillImage, equipImage, statusImage;
+     public static SpriteSheet sheet, playerSheet, menuSheet, itemSheet, skillSheet, equipSheet, statusSheet, npcSheet;
+     private BufferedImage tileImage, playerImage, menuImage, itemImage, skillImage, equipImage, statusImage, npcImage;
      public static BufferedImage grass, dirt, water, tree, multiTree, NSpath, uprtPath; 
      public static BufferedImage EWpath, upltPath, dnltPath, dnrtPath, sprite, watgrsdn;
      public static BufferedImage watgrslt, watgrsup, watgrsrt, watgrsSE, watgrsSW, watgrsNW;
      public static BufferedImage watgrsNE, pointer, pathOpRt, pathOpLt, pathOpDn, pathOpUp;
      public static BufferedImage pathOpAll, wallWood, roughWood, pathOpen, counter, storeDude, pot;
-     public static BufferedImage playerUp, playerDn, playerLt, playerRt;
+     public static BufferedImage playerUp, playerDn, playerLt, playerRt, npcUp, npcDn, npcLt, npcRt;
      public static BufferedImage singleHouse, doubleHouse, wepBanner, armBanner, innBanner, blankTile;
      public static BufferedImage menu, itemMenu, skillMenu, equipMenu, statusMenu;
      
@@ -23,6 +23,7 @@ public class Assets
          
          tileImage = loader.load("/tileSheet.png");
          playerImage = loader.load("/newSpriteSheet.png");
+         npcImage = loader.load("/npcSpriteSheet.png");
          menuImage = loader.load("/menu.png");
          itemImage = loader.load("/itemMenu.png");
          skillImage = loader.load("/skillMenu.png");
@@ -31,6 +32,7 @@ public class Assets
          
          sheet = new SpriteSheet(tileImage);
          playerSheet = new SpriteSheet(playerImage);
+         npcSheet = new SpriteSheet(npcImage);
          menuSheet = new SpriteSheet(menuImage);
          itemSheet = new SpriteSheet(itemImage);
          skillSheet = new SpriteSheet(skillImage);
@@ -44,11 +46,12 @@ public class Assets
          statusMenu = statusSheet.crop(0, 0, 345, 345);
          
          
-         setImages();
+         setTileImages();
          setPlayerImage();
+         setNpcImage();
      }
      
-     private void setImages()
+     private void setTileImages()
      {
          
          grass = sheet.crop(0, 0, 32, 32);
@@ -86,7 +89,7 @@ public class Assets
          doubleHouse = sheet.crop(0, 5, 160, 96);
          wepBanner = sheet.crop(3, 3, 32, 32);
          armBanner = sheet.crop(3, 2, 32, 32);
-         innBanner = sheet.crop(4, 3, 32, 32);
+         innBanner = sheet.crop(3, 4, 32, 32);
          blankTile = sheet.crop(4, 4, 32, 32);
      }
      
@@ -96,6 +99,14 @@ public class Assets
          playerDn = playerSheet.crop(0, 0, 32, 32);
          playerLt = playerSheet.crop(1, 1, 32, 32);
          playerRt = playerSheet.crop(1, 0, 32, 32);
+     }
+     
+     public void setNpcImage()
+     {
+         npcUp = npcSheet.crop(0, 1, 32, 32);
+         npcDn = npcSheet.crop(0, 0, 32, 32);
+         npcLt = npcSheet.crop(1, 1, 32, 32);
+         npcRt = npcSheet.crop(1, 0, 32, 32);
      }
      
 }

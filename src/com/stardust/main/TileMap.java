@@ -13,6 +13,7 @@ public class TileMap
 {   
    
    private final static int TILE_SIZE = 32;
+   private int numTiles;
    //placeholder for each tile 
    private static BufferedImage[] tiles = new BufferedImage[37];
    
@@ -23,31 +24,33 @@ public class TileMap
    //Edge of map Cooridinates
    public static int sx, sy;
    private String fileName;
-   private static int x = 0, y = 0;
+   public static int x = 0, y = 0;
    
-   public TileMap(int posX, int posY, String fileName) throws IOException
+   public TileMap(int posX, int posY, String fileName, int numTiles) throws IOException
    {
+       this.numTiles = numTiles;
        this.fileName = fileName;
        this.posX = posX;
        this.posY = posY;
-       this.sx = map.length * TILE_SIZE;
-       this.sy = map.length * TILE_SIZE;
+       this.sx = map.length * numTiles;
+       this.sy = map.length * numTiles;
+       
        setTile();
        
    }
    
    public void render(Graphics g)
    {
-       for(int x = 0; x < TILE_SIZE; x++)
+       for(int y = 0; y < numTiles; y++)
        {       
-           for(int y = 0; y < TILE_SIZE; y++)
+           for(int  x= 0; x < numTiles; x++)
            {
                int textureType = map[x][y];
                BufferedImage texture = tiles[textureType]; 
                g.drawImage(texture, posX, posY, null);
                posY += TILE_SIZE;
            }
-           posX += 32;
+           posX += TILE_SIZE;
            posY = Game.mapY;
        }
        posX = Game.mapX;

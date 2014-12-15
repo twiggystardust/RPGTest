@@ -33,8 +33,10 @@ public class Game extends Canvas implements Runnable
     public static Menu statusMenu;
     public static Pointer pointer;
     public static DialogLoader stats;
+    public static Npc npc;
     
-    public static int mapX = 0, mapY= 0;
+    public static int mapX = 300, mapY= 0;
+    public static int npcX = 650, npcY = 650;
     
     public void init() throws IOException
     {
@@ -94,6 +96,7 @@ public class Game extends Canvas implements Runnable
     {
         move.update();
         player.update();
+        npc.update();
     }
     
     public void render()
@@ -115,6 +118,7 @@ public class Game extends Canvas implements Runnable
                 tileMap.render(g);
                 layer2.render(g);
                 layer3.render(g);
+                npc.render(g);
                 player.render(g);
                 break;
             }
@@ -242,13 +246,14 @@ public class Game extends Canvas implements Runnable
         
         stats = new DialogLoader("res/stats.txt");
         stats.fileReader();
-        tileMap = new TileMap(mapX, mapY, "res/tileMap3.txt");
-        layer2 = new TileMap(mapX, mapY, "res/newLayer2.txt");
-        layer3 = new TileMap(mapX, mapY, "res/newLayer3.txt");
+        tileMap = new TileMap(mapX, mapY, "res/tileMap3.txt", 32);
+        layer2 = new TileMap(mapX, mapY, "res/newLayer2.txt", 32);
+        layer3 = new TileMap(mapX, mapY, "res/newLayer3.txt", 32);
         tileMap.fileParser();
         layer2.fileParser();
         layer3.fileParser();
         player = new Player(HEIGHT, WIDTH, 32, 32);
+        npc = new Npc(npcX, npcY, 32, 32);
         menu = new Menu(135, 135, 345, 345, Assets.menu);
         itemMenu = new Menu(135, 135, 345, 345, Assets.itemMenu);
         skillMenu = new Menu(135, 135, 345, 345, Assets.skillMenu);
