@@ -5,3 +5,11 @@ and RPG.
 1st change: Fixed tile map rendering and updated text files to position tiles 
 	    correctly. Added NPC. Also made npc move a little, although the 
 	    movement is jumpy. Will figure out a way to fix soon.
+
+2nd change: Added World map. Can transition between that and town map(though 
+            the code to do this is terrible and will be replaced as soon as 
+            collision is added.) Also updated Tile class, not quite finished 
+            with that part. Tried adding a method to detect what type of tile 
+            the player is on. Added a 2nd layer to the world map(it has only 
+            one town on it at the moment.) 
+
