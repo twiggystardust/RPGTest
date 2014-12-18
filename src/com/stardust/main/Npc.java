@@ -13,11 +13,13 @@ public class Npc
     public static final int SPEED = 2;
     public static int lastLook = 3;
     
+    
     private BufferedImage image;
     private Random rand;
     private Long now = 0L;
     private Long lastMove = 0L;
     private final Long moveSpeed = 2000000000L;
+    //private final int MOVE_AMOUNT = 
     
     public Npc(int x, int y, int sx, int sy)
     {

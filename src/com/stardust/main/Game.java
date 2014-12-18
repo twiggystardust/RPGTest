@@ -22,6 +22,8 @@ public class Game extends Canvas implements Runnable
     public static TileMap tileMap;
     public static TileMap layer2;
     public static TileMap layer3;
+    public static TileMap world;
+    public static TileMap worldLyr2;
     public Assets assets;
     public Input input;
     public Movement move;
@@ -34,9 +36,11 @@ public class Game extends Canvas implements Runnable
     public static Pointer pointer;
     public static DialogLoader stats;
     public static Npc npc;
+    public static Tile tile;
     
-    public static int mapX = 300, mapY= 0;
+    public static int mapX = 284, mapY = 0;
     public static int npcX = 650, npcY = 650;
+    public static int wMapX = -800, wMapY = -800;
     
     public void init() throws IOException
     {
@@ -97,6 +101,27 @@ public class Game extends Canvas implements Runnable
         move.update();
         player.update();
         npc.update();
+        tile.update();
+        if(stateEngine.state != StateEngine.GameState.STATE_TOWN)
+        {
+            if(wMapX <= -896 && wMapY <= -704 && wMapX >= -912 && wMapY >= -736)
+            {
+                stateEngine.state = StateEngine.GameState.STATE_TOWN;
+                mapX = 280;
+                mapY = 0;
+            }
+            
+        }
+        if(stateEngine.state != StateEngine.GameState.STATE_WORLD)
+        {
+            if(mapX >= 299 && mapY >= -16 && mapY <= 16)
+            {
+                stateEngine.state = StateEngine.GameState.STATE_WORLD;
+                wMapX = -879;
+                wMapY = -735;
+            }
+            
+        }
     }
     
     public void render()
@@ -113,6 +138,13 @@ public class Game extends Canvas implements Runnable
         g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
         switch(StateEngine.state)
         {
+            case STATE_WORLD:
+            {
+                world.render(g);
+                worldLyr2.render(g);
+                player.render(g);
+                break;
+            }
             case STATE_TOWN:
             {
                 tileMap.render(g);
@@ -249,10 +281,16 @@ public class Game extends Canvas implements Runnable
         tileMap = new TileMap(mapX, mapY, "res/tileMap3.txt", 32);
         layer2 = new TileMap(mapX, mapY, "res/newLayer2.txt", 32);
         layer3 = new TileMap(mapX, mapY, "res/newLayer3.txt", 32);
+        world = new TileMap(wMapX, wMapY, "res/worldMap.txt", 50);
+        worldLyr2 = new TileMap(wMapX, wMapY, "res/worldLayer2.txt", 50);
         tileMap.fileParser();
         layer2.fileParser();
         layer3.fileParser();
-        player = new Player(HEIGHT, WIDTH, 32, 32);
+        world.fileParser();
+        worldLyr2.fileParser();
+        
+        
+        player = new Player(HEIGHT - 32, WIDTH - 32, 32, 32);
         npc = new Npc(npcX, npcY, 32, 32);
         menu = new Menu(135, 135, 345, 345, Assets.menu);
         itemMenu = new Menu(135, 135, 345, 345, Assets.itemMenu);
@@ -260,6 +298,7 @@ public class Game extends Canvas implements Runnable
         equipMenu = new Menu(135, 135, 345, 345, Assets.equipMenu);
         statusMenu = new Menu(135, 135, 345, 345, Assets.statusMenu);
         pointer = new Pointer(335, 148, 32, 32);
+        tile = new Tile();
         
         input = new Input();
         move = new Movement();

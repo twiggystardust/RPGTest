@@ -25,7 +25,7 @@ public class StateEngine
     
     public StateEngine()
     {
-        state = GameState.STATE_TOWN;
+        state = GameState.STATE_WORLD;
         menuState = MenuState.MAIN;
     }
     public void update()

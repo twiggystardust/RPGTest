@@ -15,7 +15,7 @@ public class Assets
      public static BufferedImage pathOpAll, wallWood, roughWood, pathOpen, counter, storeDude, pot;
      public static BufferedImage playerUp, playerDn, playerLt, playerRt, npcUp, npcDn, npcLt, npcRt;
      public static BufferedImage singleHouse, doubleHouse, wepBanner, armBanner, innBanner, blankTile;
-     public static BufferedImage menu, itemMenu, skillMenu, equipMenu, statusMenu;
+     public static BufferedImage menu, itemMenu, skillMenu, equipMenu, statusMenu, townTile;
      
      public Assets()
      {
@@ -73,7 +73,7 @@ public class Assets
          watgrsSW = sheet.crop(5, 1, 32, 32);
          watgrsNW = sheet.crop(6, 1, 32, 32);
          watgrsNE = sheet.crop(7, 1, 32, 32);
-         wallWood = sheet.crop(8, 1, 32, 32);
+         wallWood = sheet.crop(6, 3, 32, 32);
          pointer = sheet.crop(4, 2, 32, 32);
          pathOpRt = sheet.crop(5, 2, 32, 32);
          pathOpLt = sheet.crop(6, 2, 32, 32);
@@ -91,7 +91,14 @@ public class Assets
          armBanner = sheet.crop(3, 2, 32, 32);
          innBanner = sheet.crop(3, 4, 32, 32);
          blankTile = sheet.crop(4, 4, 32, 32);
+         townTile = sheet.crop(5, 4, 64, 64);
      }
+     
+     
+     
+     //MAKE TOWN TILE AT LEAST 64X64
+     
+     
      
      public void setPlayerImage()
      {

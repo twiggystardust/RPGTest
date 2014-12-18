@@ -9,19 +9,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class TileMap
+public class WorldMap
 {   
    
-   private final  int TILE_SIZE = 32;
+   private final static int TILE_SIZE = 32;
    private final int WORLD_TILE = 50;
    private int numTiles;
    //placeholder for each tile 
-   public static BufferedImage[] tiles = new BufferedImage[38];
-   public static Tile[] tileImage = new Tile[38];
+   private static BufferedImage[] tiles = new BufferedImage[37];
    
    //array of tile types
-   public int[][] map = new int[TILE_SIZE][TILE_SIZE];
-   public int[][] worldMap = new int[WORLD_TILE][WORLD_TILE];
+   private int[][] map = new int[TILE_SIZE][TILE_SIZE];
+   private int[][] worldMap = new int[WORLD_TILE][WORLD_TILE];
    //position coordinates
    private int posX, posY;
    //Edge of map Cooridinates
@@ -29,7 +28,7 @@ public class TileMap
    private String fileName;
    public static int x = 0, y = 0;
    
-   public TileMap(int posX, int posY, String fileName, int numTiles) throws IOException
+   public WorldMap(int posX, int posY, String fileName, int numTiles) throws IOException
    {
        this.numTiles = numTiles;
        this.fileName = fileName;
@@ -45,7 +44,8 @@ public class TileMap
            this.sx = worldMap.length * TILE_SIZE;
            this.sy = worldMap.length * TILE_SIZE;
        }
-       setTile();       
+       setTile();
+       
    }
    
    public void render(Graphics g)
@@ -80,10 +80,10 @@ public class TileMap
                     posY += TILE_SIZE;
                 }
                 posX += TILE_SIZE;
-                posY = Game.wMapY;
+                posY = Game.mapY;
             }
-            posX = Game.wMapX;
-            posY = Game.wMapY;
+            posX = Game.mapX;
+            posY = Game.mapY;
        }
    }
 
@@ -127,15 +127,15 @@ public class TileMap
        tiles[34] = Assets.armBanner;
        tiles[35] = Assets.innBanner;
        tiles[36] = Assets.blankTile;
-       tiles[37] = Assets.townTile;
    }
    
    public void fileParser() throws IOException
    {
        BufferedReader in = new BufferedReader(new FileReader(fileName));
        
-       String line;           
-       if(numTiles == TILE_SIZE)
+       String line;
+       
+       if(Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
        {
             while((line = in.readLine()) != null)
             {
@@ -153,7 +153,7 @@ public class TileMap
             x = 0;
        }
        
-       if(numTiles == WORLD_TILE)
+       if(Game.stateEngine.state == StateEngine.GameState.STATE_WORLD)
        {
            while((line = in.readLine()) != null)
            {
@@ -172,13 +172,5 @@ public class TileMap
        }
        
        in.close();
-   } 
-   
-   public static void setTileImage()
-   {
-       for(int i = 0; i < tiles.length; i++)
-       {
-           tileImage[i].Tile(tiles[i], i);
-       }
-   }
+   }         
 }

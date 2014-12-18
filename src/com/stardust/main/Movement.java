@@ -13,10 +13,21 @@ public class Movement
     
     public void update()
     {
-        mapMove();
-        setEdges();
+        
         menuDisplay();
         menuMove();
+        
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
+        {
+            setTownEdges();
+            mapMove();
+        }
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_WORLD)
+        {
+            setWorldEdges();
+            wMapMove();
+        }
+        
     }
     
     public void mapMove()
@@ -50,8 +61,34 @@ public class Movement
         }
         
     }
+    public void wMapMove()
+    {
+        if(Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
+        {
+            if(Input.up)
+            {
+                Game.wMapY += Player.SPEED;
+                Player.lastLook = 0;
+            }
+            if(Input.dn)
+            {
+                Game.wMapY -= Player.SPEED;
+                Player.lastLook = 1;
+            }
+            if(Input.lt)
+            {
+                Game.wMapX += Player.SPEED;
+                Player.lastLook = 2;
+            }
+            if(Input.rt)
+            {
+                Game.wMapX -= Player.SPEED;
+                Player.lastLook = 3;
+            }
+        }
+    }
     
-    public void setEdges()
+    public void setTownEdges()
     {
        if(Game.mapY >= Game.HEIGHT)
        {
@@ -71,16 +108,50 @@ public class Movement
        }
     }
     
+    public void setWorldEdges()
+    {
+       if(Game.wMapY >= Game.HEIGHT)
+       {
+           Game.wMapY = Game.HEIGHT;
+       }
+       if(Game.wMapY  + TileMap.sy <= Game.HEIGHT + 35)
+       {
+           Game.wMapY = -TileMap.sy + Game.HEIGHT + 35;
+       }
+       if(Game.wMapX >= Game.WIDTH)
+       {
+           Game.wMapX = Game.WIDTH;
+       }
+       if(Game.wMapX + TileMap.sx <= Game.WIDTH + 35)
+       {
+           Game.wMapX = -TileMap.sx + Game.WIDTH + 35;
+       }
+    }
+    
     public void menuDisplay()
     {
-        if(Input.spc && Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
         {
-            Game.stateEngine.state = StateEngine.GameState.STATE_MENU;
+            if(Input.spc && Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_MENU;
+            }
+            if(Input.ent && Game.stateEngine.state != StateEngine.GameState.STATE_TOWN)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_TOWN;
+            } 
         }
-        if(Input.ent && Game.stateEngine.state != StateEngine.GameState.STATE_TOWN)
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_WORLD)
         {
-            Game.stateEngine.state = StateEngine.GameState.STATE_TOWN;
-        }        
+            if(Input.spc && Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_MENU;
+            }
+            if(Input.ent && Game.stateEngine.state != StateEngine.GameState.STATE_TOWN)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
+            } 
+        }
     }
     
     public void menuMove()
