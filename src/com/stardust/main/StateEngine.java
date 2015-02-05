@@ -4,18 +4,19 @@ public class StateEngine
 {
     public static GameState state;
     public static MenuState menuState;
+    public static DialogState dialogState;
     
-    enum GameState
+    public enum GameState
     {
-        STATE_MENU,
         STATE_WORLD,
         STATE_TOWN,
-        STATE_STORE,
+        STATE_SHOP,
         STATE_ITEMMENU
     };
     
-    enum MenuState
+    public enum MenuState
     {
+        CLOSED,
         MAIN,
         ITEM,
         SKILL,
@@ -23,10 +24,18 @@ public class StateEngine
         STATUS
     };
     
+    public enum DialogState
+    {
+        DIALOG_ON,
+        DIALOG_OFF
+    };
+    
     public StateEngine()
     {
         state = GameState.STATE_WORLD;
-        menuState = MenuState.MAIN;
+        menuState = MenuState.CLOSED;
+        dialogState = DialogState.DIALOG_OFF;
+        
     }
     public void update()
     {

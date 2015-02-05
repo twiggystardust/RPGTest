@@ -6,29 +6,32 @@ import java.awt.image.BufferedImage;
 public class Assets 
 {
      public ImageLoader loader;
-     public static SpriteSheet sheet, playerSheet, menuSheet, itemSheet, skillSheet, equipSheet, statusSheet, npcSheet;
-     private BufferedImage tileImage, playerImage, menuImage, itemImage, skillImage, equipImage, statusImage, npcImage;
+     public static SpriteSheet sheet, playerSheet, menuSheet, itemSheet, skillSheet, equipSheet, statusSheet, npcSheet, dialogSheet;
+     private BufferedImage tileImage, playerImage, menuImage, itemImage, skillImage, equipImage, statusImage, npcImage, textImage;
      public static BufferedImage grass, dirt, water, tree, multiTree, NSpath, uprtPath; 
      public static BufferedImage EWpath, upltPath, dnltPath, dnrtPath, sprite, watgrsdn;
      public static BufferedImage watgrslt, watgrsup, watgrsrt, watgrsSE, watgrsSW, watgrsNW;
      public static BufferedImage watgrsNE, pointer, pathOpRt, pathOpLt, pathOpDn, pathOpUp;
      public static BufferedImage pathOpAll, wallWood, roughWood, pathOpen, counter, storeDude, pot;
-     public static BufferedImage playerUp, playerDn, playerLt, playerRt, npcUp, npcDn, npcLt, npcRt;
+     public static BufferedImage playerUp, playerUp1, playerUp2, playerDn, playerDn1, playerDn2, playerLt, playerLt1, playerLt2, playerRt, playerRt1, playerRt2;
+     public static BufferedImage npcUp, npcDn, npcLt, npcRt;
      public static BufferedImage singleHouse, doubleHouse, wepBanner, armBanner, innBanner, blankTile;
-     public static BufferedImage menu, itemMenu, skillMenu, equipMenu, statusMenu, townTile;
+     public static BufferedImage mtnTile, mtnTileLt, mtnTileRt, mtnTileCtTp, mtnTileRtTp, mtnTileLtTp, mtnCave;
+     public static BufferedImage menu, itemMenu, skillMenu, equipMenu, statusMenu, townTile, dialogBox;
      
      public Assets()
      {
          loader = new ImageLoader();
          
          tileImage = loader.load("/tileSheet.png");
-         playerImage = loader.load("/newSpriteSheet.png");
+         playerImage = loader.load("/newSpriteSheet1.png");
          npcImage = loader.load("/npcSpriteSheet.png");
          menuImage = loader.load("/menu.png");
          itemImage = loader.load("/itemMenu.png");
          skillImage = loader.load("/skillMenu.png");
          equipImage = loader.load("/equipMenu.png");
          statusImage = loader.load("/statusMenu.png");
+         textImage = loader.load("/dialogBox.png");
          
          sheet = new SpriteSheet(tileImage);
          playerSheet = new SpriteSheet(playerImage);
@@ -38,12 +41,15 @@ public class Assets
          skillSheet = new SpriteSheet(skillImage);
          equipSheet = new SpriteSheet(equipImage);
          statusSheet = new SpriteSheet(statusImage);
+         dialogSheet = new SpriteSheet(textImage);
          
          menu = menuSheet.crop(0, 0, 345, 345);
          itemMenu = itemSheet.crop(0, 0, 345, 345);
          skillMenu = skillSheet.crop(0, 0, 345, 345);
          equipMenu = equipSheet.crop(0, 0, 345, 345);
          statusMenu = statusSheet.crop(0, 0, 345, 345);
+         dialogBox = dialogSheet.crop(0, 0, 635, 200);
+         
          
          
          setTileImages();
@@ -92,6 +98,13 @@ public class Assets
          innBanner = sheet.crop(3, 4, 32, 32);
          blankTile = sheet.crop(4, 4, 32, 32);
          townTile = sheet.crop(5, 4, 64, 64);
+         mtnTile = sheet.crop(8, 6, 32, 32);
+         mtnTileLt = sheet.crop(7, 6, 32, 32);
+         mtnTileRt = sheet.crop(9, 6, 32, 32);
+         mtnTileCtTp = sheet.crop(8, 5, 32, 32);
+         mtnTileRtTp = sheet.crop(9, 5, 32, 32);
+         mtnTileLtTp = sheet.crop(7, 5, 32, 32);
+         mtnCave = sheet.crop(6, 6, 32, 32);
      }
      
      
@@ -102,10 +115,18 @@ public class Assets
      
      public void setPlayerImage()
      {
-         playerUp = playerSheet.crop (0, 1, 32, 32);
-         playerDn = playerSheet.crop(0, 0, 32, 32);
-         playerLt = playerSheet.crop(1, 1, 32, 32);
+         playerUp = playerSheet.crop (0, 0, 32, 32);
+         playerUp1 = playerSheet.crop(0, 1, 32, 32);
+         playerUp2 = playerSheet.crop(0, 2, 32, 32);
+         playerDn = playerSheet.crop(2, 0, 32, 32);
+         playerDn1 = playerSheet.crop(2, 1, 32, 32);
+         playerDn2 = playerSheet.crop(2, 2, 32, 32);
+         playerLt = playerSheet.crop(3, 0, 32, 32);
+         playerLt1 = playerSheet.crop(3, 1, 32, 32);
+         playerLt2 = playerSheet.crop(3, 2, 32, 32);
          playerRt = playerSheet.crop(1, 0, 32, 32);
+         playerRt1 = playerSheet.crop(1, 1, 32, 32);
+         playerRt2 = playerSheet.crop(1, 2, 32, 32);
      }
      
      public void setNpcImage()

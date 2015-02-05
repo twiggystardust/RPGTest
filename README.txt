@@ -13,3 +13,12 @@ and RPG.
             the player is on. Added a 2nd layer to the world map(it has only 
             one town on it at the moment.) 
 
+3rd change: Fixed NPC movement slightly. Made him move more often but less 
+            distance. Added mountain tiles. Added transition class(although
+            I'm not sure wether this is good practice or not.) Working on adding
+            shop state.
+
+4th change: Added animation to player (still need to fix left/right movment pngs.) 
+	    Added shop state. Added dialog with shopkeep (still need to fix, button 
+	    push is too quick.) Added player stats, painted them to the screen in 
+	    the menu. 

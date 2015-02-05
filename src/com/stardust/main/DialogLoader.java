@@ -1,5 +1,7 @@
 package com.stardust.main;
 
+import com.stardust.main.gfx.Assets;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +17,13 @@ public class DialogLoader
         this.fileName = fileName;
     }
     
+    public void render(Graphics g)
+    {
+        g.drawImage(Assets.dialogBox, 0, 410, null);        
+    }
+    
+        
+    
     public void fileReader() throws IOException
     {
         try (BufferedReader in = new BufferedReader(new FileReader(fileName)))
@@ -29,6 +38,7 @@ public class DialogLoader
                 {
                     text[i] = values[i];
                 }
-            }}
+            }
+        }
     }
 }

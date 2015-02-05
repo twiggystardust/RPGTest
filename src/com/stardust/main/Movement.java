@@ -1,5 +1,7 @@
 package com.stardust.main;
 
+import com.stardust.main.entities.Player;
+
 public class Movement 
 {
     Long now = 0L;
@@ -19,144 +21,145 @@ public class Movement
         
         if(Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
         {
+            mapMove();  
             setTownEdges();
-            mapMove();
+                    
         }
         if(Game.stateEngine.state == StateEngine.GameState.STATE_WORLD)
         {
             setWorldEdges();
             wMapMove();
         }
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_SHOP)
+        {
+            shopMove();
+            setShopEdges();
+        }
         
     }
     
     public void mapMove()
     {
-        if(Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
+        if(Game.stateEngine.menuState == StateEngine.MenuState.CLOSED)
         {
             if(Input.up)
             {
                 Game.mapY += Player.SPEED;
                 Game.npcY += Player.SPEED;
                 Player.lastLook = 0;
+                Player.walking = true;
             }
             if(Input.dn)
             {
                 Game.mapY -= Player.SPEED;
                 Game.npcY -= Player.SPEED;
                 Player.lastLook = 1;
+                Player.walking = true;
             }
             if(Input.lt)
             {
                 Game.mapX += Player.SPEED;
                 Game.npcX += Player.SPEED;
                 Player.lastLook = 2;
+                Player.walking = true;
             }
             if(Input.rt)
             {
                 Game.mapX -= Player.SPEED;
                 Game.npcX -= Player.SPEED;
                 Player.lastLook = 3;
+                Player.walking = true;
             }
         }
         
     }
     public void wMapMove()
     {
-        if(Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
+        if(Game.stateEngine.menuState == StateEngine.MenuState.CLOSED)
         {
             if(Input.up)
             {
                 Game.wMapY += Player.SPEED;
                 Player.lastLook = 0;
+                Player.walking = true;
             }
             if(Input.dn)
             {
                 Game.wMapY -= Player.SPEED;
                 Player.lastLook = 1;
+                Player.walking = true;
             }
             if(Input.lt)
             {
                 Game.wMapX += Player.SPEED;
                 Player.lastLook = 2;
+                Player.walking = true;
             }
             if(Input.rt)
             {
                 Game.wMapX -= Player.SPEED;
                 Player.lastLook = 3;
+                Player.walking = true;
             }
         }
     }
     
     public void setTownEdges()
     {
-       if(Game.mapY >= Game.HEIGHT)
+       if(Game.mapY >= Game.HEIGHT - 32)
        {
-           Game.mapY = Game.HEIGHT;
+           Game.mapY = Game.HEIGHT - 32;
        }
-       if(Game.mapY  + TileMap.sy <= Game.HEIGHT + 35)
+       if(Game.mapY  + Game.tileMap.sy <= Game.HEIGHT)
        {
-           Game.mapY = -TileMap.sy + Game.HEIGHT + 35;
+           Game.mapY = -Game.tileMap.sy + Game.HEIGHT;
        }
-       if(Game.mapX >= Game.WIDTH)
+       if(Game.mapX >= Game.WIDTH - 32)
        {
-           Game.mapX = Game.WIDTH;
+           Game.mapX = Game.WIDTH - 32;
        }
-       if(Game.mapX + TileMap.sx <= Game.WIDTH + 35)
+       if(Game.mapX + Game.tileMap.sx <= Game.WIDTH)
        {
-           Game.mapX = -TileMap.sx + Game.WIDTH + 35;
+           Game.mapX = -Game.tileMap.sx + Game.WIDTH;
        }
     }
     
     public void setWorldEdges()
     {
-       if(Game.wMapY >= Game.HEIGHT)
+       if(Game.wMapY >= Game.HEIGHT - 32)
        {
-           Game.wMapY = Game.HEIGHT;
+           Game.wMapY = Game.HEIGHT - 32;
        }
-       if(Game.wMapY  + TileMap.sy <= Game.HEIGHT + 35)
+       if(Game.wMapY  + Game.world.wsy <= Game.HEIGHT)
        {
-           Game.wMapY = -TileMap.sy + Game.HEIGHT + 35;
+           Game.wMapY = -Game.world.wsy + Game.HEIGHT;
        }
-       if(Game.wMapX >= Game.WIDTH)
+       if(Game.wMapX >= Game.WIDTH - 32)
        {
-           Game.wMapX = Game.WIDTH;
+           Game.wMapX = Game.WIDTH - 32;
        }
-       if(Game.wMapX + TileMap.sx <= Game.WIDTH + 35)
+       if(Game.wMapX + Game.world.wsx <= Game.WIDTH)
        {
-           Game.wMapX = -TileMap.sx + Game.WIDTH + 35;
+           Game.wMapX = -Game.world.wsx + Game.WIDTH;
        }
     }
     
     public void menuDisplay()
     {
-        if(Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
+        
+        if(Input.spc && Game.stateEngine.menuState != StateEngine.MenuState.MAIN)
         {
-            if(Input.spc && Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
-            {
-                Game.stateEngine.state = StateEngine.GameState.STATE_MENU;
-            }
-            if(Input.ent && Game.stateEngine.state != StateEngine.GameState.STATE_TOWN)
-            {
-                Game.stateEngine.state = StateEngine.GameState.STATE_TOWN;
-            } 
+            Game.stateEngine.menuState = StateEngine.MenuState.MAIN;
         }
-        if(Game.stateEngine.state == StateEngine.GameState.STATE_WORLD)
+        if(Input.ent && Game.stateEngine.menuState != StateEngine.MenuState.CLOSED)
         {
-            if(Input.spc && Game.stateEngine.state != StateEngine.GameState.STATE_MENU)
-            {
-                Game.stateEngine.state = StateEngine.GameState.STATE_MENU;
-            }
-            if(Input.ent && Game.stateEngine.state != StateEngine.GameState.STATE_TOWN)
-            {
-                Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
-            } 
+            Game.stateEngine.menuState = StateEngine.menuState.CLOSED;
         }
     }
     
     public void menuMove()
     {
-        if(Game.stateEngine.state == StateEngine.GameState.STATE_MENU && Game.stateEngine.menuState == StateEngine.MenuState.MAIN)
+        if(Game.stateEngine.menuState == StateEngine.MenuState.MAIN)
         {
             now = System.nanoTime();
             
@@ -173,7 +176,7 @@ public class Movement
                 lastMove = now;
             }
             setChoice();
-            if(Input.a && Game.stateEngine.state != StateEngine.GameState.STATE_ITEMMENU)
+            if(Input.a)
             {
                 switch(choice)
                 {
@@ -283,4 +286,59 @@ public class Movement
             }
         }
     }
+    
+    public void shopMove()
+    {
+        if(Game.stateEngine.menuState == StateEngine.MenuState.CLOSED)
+        {
+            if(Input.up)
+            {
+                Game.player.y -= Player.SPEED;
+                Player.lastLook = 0;
+                Player.walking = true;
+            }
+            if(Input.dn)
+            {
+                Game.player.y += Player.SPEED;
+                Player.lastLook = 1;
+                Player.walking = true;
+            }
+            if(Input.lt)
+            {
+                Game.player.x -= Player.SPEED;
+                Player.lastLook = 2;
+                Player.walking = true;
+            }
+            if(Input.rt)
+            {
+                Game.player.x += Player.SPEED;
+                Player.lastLook = 3;
+                Player.walking = true;
+            }
+        }
+    }
+    
+    public void setShopEdges()
+    {
+        if(Game.player.x >= 314 && Game.player.x <= 322)
+        {
+        }
+        else if(Game.player.y >= (Game.HEIGHT * Game.SCALE) - 256)
+        {
+            Game.player.y = (Game.HEIGHT * Game.SCALE) - 256;
+        }
+        if(Game.player.y <= 256)
+        {
+            Game.player.y = 256;
+        }
+        if(Game.player.x >= (Game.WIDTH * Game.SCALE) - 256)
+        {
+            Game.player.x = (Game.WIDTH * Game.SCALE) - 256;
+        }
+        if(Game.player.x <= 256)
+        {
+            Game.player.x = 256;
+        }
+    }
+        
 }
