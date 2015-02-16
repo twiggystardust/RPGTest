@@ -9,13 +9,27 @@ public class Transition
     
     public static void update()
     {
-        if(Game.stateEngine.state != StateEngine.GameState.STATE_TOWN && Game.stateEngine.state != StateEngine.GameState.STATE_SHOP)
+        if(Game.stateEngine.state != StateEngine.GameState.STATE_TOWN &&
+                Game.stateEngine.state != StateEngine.GameState.STATE_SHOP &&
+                Game.stateEngine.state != StateEngine.GameState.STATE_DUNGEON)
         {
-            if(Game.wMapX <= -920 && Game.wMapX >= -960 && Game.wMapY <= -770 && Game.wMapY >= -800)
+            if(Game.wMapX <= -920 && 
+                    Game.wMapX >= -960 && 
+                    Game.wMapY <= -770 && 
+                    Game.wMapY >= -800)
             {
                 Game.stateEngine.state = StateEngine.GameState.STATE_TOWN;
                 Game.mapX = 260;
                 Game.mapY = -32;
+            }
+            if(Game.wMapX <= -80 &&
+                    Game.wMapX >= -112 &&
+                    Game.wMapY <= -96 &&
+                    Game.wMapY >= -110)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_DUNGEON;
+                Game.dMapX = -644;
+                Game.dMapY = -736;
             }
             
         }
@@ -26,6 +40,12 @@ public class Transition
                 Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
                 Game.wMapX = -898;
                 Game.wMapY = -784;
+            }
+            if(Game.dMapX <= -608 && Game.dMapX >= -672 && Game.dMapY < -Game.dungeonMap.dsy + 32)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
+                Game.wMapX = -96;
+                Game.wMapY = -116;
             }
             
         }

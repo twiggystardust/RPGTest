@@ -22,3 +22,7 @@ and RPG.
 	    Added shop state. Added dialog with shopkeep (still need to fix, button 
 	    push is too quick.) Added player stats, painted them to the screen in 
 	    the menu. 
+
+5th change: Added dungeon tiles to tile sheet along with dungeon state and transistion
+	    to and from the state/dungeon. Started building inventory (this is trial 
+	    and error at this point.) Also fixed player animation. 

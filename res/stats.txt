@@ -1,1 +1,1 @@
-50,10,WoodenHelmet,WoodenArmor,WoodenSword,WoodenBoots,5,5,5,1,0,10,
+50,10,Woodenarmor,Wodden Greaves,WoodenSword,WoodenShield,5,5,5,1,0,10,

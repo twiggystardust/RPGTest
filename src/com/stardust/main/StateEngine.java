@@ -11,6 +11,7 @@ public class StateEngine
         STATE_WORLD,
         STATE_TOWN,
         STATE_SHOP,
+        STATE_DUNGEON,
         STATE_ITEMMENU
     };
     

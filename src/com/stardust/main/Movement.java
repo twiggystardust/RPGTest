@@ -35,6 +35,11 @@ public class Movement
             shopMove();
             setShopEdges();
         }
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_DUNGEON)
+        {
+            dungeonMove();
+            setDungeonEdges();
+        }
         
     }
     
@@ -103,7 +108,37 @@ public class Movement
             }
         }
     }
-    
+    public void dungeonMove()
+    {
+        if(Game.stateEngine.menuState == StateEngine.MenuState.CLOSED)
+        {
+            if(Input.up)
+            {
+                Game.dMapY += Player.SPEED;
+                Player.lastLook = 0;
+                Player.walking = true;
+            }
+            if(Input.dn)
+            {
+                Game.dMapY -= Player.SPEED;
+                Player.lastLook = 1;
+                Player.walking = true;
+            }
+            if(Input.lt)
+            {
+                Game.dMapX += Player.SPEED;
+                Player.lastLook = 2;
+                Player.walking = true;
+            }
+            if(Input.rt)
+            {
+                Game.dMapX -= Player.SPEED;
+                Player.lastLook = 3;
+                Player.walking = true;
+            }
+        }
+        
+    }
     public void setTownEdges()
     {
        if(Game.mapY >= Game.HEIGHT - 32)
@@ -141,6 +176,32 @@ public class Movement
        if(Game.wMapX + Game.world.wsx <= Game.WIDTH)
        {
            Game.wMapX = -Game.world.wsx + Game.WIDTH;
+       }
+    }
+    public void setDungeonEdges()
+    {
+       if(Game.dMapX <= -608 && Game.dMapX >= -672)
+       {
+           if(Game.dMapY + Game.dungeonMap.dsy <= Game.HEIGHT)
+           {
+               Game.dMapY = -Game.dungeonMap.dsy + Game.HEIGHT;
+           }
+       }       
+       else if(Game.dMapY >= Game.HEIGHT - 96)
+       {
+           Game.dMapY = Game.HEIGHT - 96;
+       }
+       else if(Game.dMapY  + Game.dungeonMap.dsy <= Game.HEIGHT + 64)
+       {
+           Game.dMapY = -Game.dungeonMap.dsy + Game.HEIGHT + 64;
+       }
+       if(Game.dMapX >= Game.WIDTH - 96)
+       {
+           Game.dMapX = Game.WIDTH - 96;
+       }
+       if(Game.dMapX + Game.dungeonMap.dsx <= Game.WIDTH + 64)
+       {
+           Game.dMapX = -Game.dungeonMap.dsx + Game.WIDTH + 64;
        }
     }
     

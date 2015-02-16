@@ -11,6 +11,7 @@ public class Player extends Entity
     public static int lastLook = 3;
     private int anim = 0;
     public static boolean walking = false;
+    public String body, legs, rHand, lHand;
     
     public Player(int x, int y, int sx, int sy)
     {
@@ -70,13 +71,17 @@ public class Player extends Entity
                 image = Assets.playerLt;
                 if(walking)
                 {
-                    if(anim % 20 > 10)
+                    if(anim % 12 > 4)
                     {
                         image = Assets.playerLt1;
                     }
-                    else
+                    else if(anim % 12 > 8)
                     {
                         image = Assets.playerLt2;
+                    }
+                    else
+                    {
+                        image = Assets.playerLt;
                     }
                 }
                 break;
@@ -86,13 +91,17 @@ public class Player extends Entity
                 image = Assets.playerRt;
                 if(walking)
                 {
-                    if(anim % 20 > 10)
+                    if(anim % 12 > 4)
                     {
                         image = Assets.playerRt1;
                     }
-                    else
+                    else if(anim % 12 > 8)
                     {
                         image = Assets.playerRt2;
+                    }
+                    else
+                    {
+                        image = Assets.playerRt;
                     }
                 }
                 break;

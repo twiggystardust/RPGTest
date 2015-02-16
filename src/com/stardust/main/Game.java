@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable
     public static TileMap world;
     public static TileMap worldLyr2;
     public static TileMap shopMap;
+    public static TileMap dungeonMap;
     public Assets assets;
     public Input input;
     public Movement move;
@@ -50,6 +51,7 @@ public class Game extends Canvas implements Runnable
     public static int npcX = 650, npcY = 650;
     public static int wMapX = -800, wMapY = -800;
     public static int sMapX = 0, sMapY = 0;
+    public static int dMapX = -644, dMapY = -736;
     
     public static boolean dialogRender = false;
     public static int dialogChoice = 0;
@@ -118,7 +120,7 @@ public class Game extends Canvas implements Runnable
             if(System.currentTimeMillis() - timer > 1000)
             {
                 timer += 1000;                
-                frame.setTitle(title + "  |  " + "Updates/second: " + updates + "  Renders/second: " + frames);
+                frame.setTitle(title + "  |  " + "Updates/second: " + updates + " |  Renders/second: " + frames);
                 updates = 0;
                 frames = 0;
             }
@@ -162,6 +164,12 @@ public class Game extends Canvas implements Runnable
             {
                 world.render(g);
                 worldLyr2.render(g);
+                player.render(g);
+                break;
+            }
+            case STATE_DUNGEON:
+            {
+                dungeonMap.render(g);
                 player.render(g);
                 break;
             }
@@ -304,12 +312,14 @@ public class Game extends Canvas implements Runnable
         world = new TileMap(wMapX, wMapY, "res/worldMap.txt", 50);
         worldLyr2 = new TileMap(wMapX, wMapY, "res/worldLayer2.txt", 50);
         shopMap = new TileMap(sMapX, sMapY, "res/shopMap.txt", 20);
+        dungeonMap = new TileMap(mapX, mapY, "res/dungeonMap.txt", 34);
         tileMap.fileParser();
         layer2.fileParser();
         layer3.fileParser();
         world.fileParser();
         worldLyr2.fileParser();
         shopMap.fileParser();
+        dungeonMap.fileParser();
         
         
         player = new Player(HEIGHT - 32, WIDTH - 32, 32, 32);

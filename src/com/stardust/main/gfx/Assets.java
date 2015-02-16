@@ -18,13 +18,15 @@ public class Assets
      public static BufferedImage singleHouse, doubleHouse, wepBanner, armBanner, innBanner, blankTile;
      public static BufferedImage mtnTile, mtnTileLt, mtnTileRt, mtnTileCtTp, mtnTileRtTp, mtnTileLtTp, mtnCave;
      public static BufferedImage menu, itemMenu, skillMenu, equipMenu, statusMenu, townTile, dialogBox;
+     public static BufferedImage mtnWall, mtnWall1, mtnWall2,mtnWall3, mtnWall4, mtnWall5, mtnWall6, mtnWall7, mtnWall8, mtnWall9, mtnWall10;
+     public static BufferedImage mtnWall11, mtnWall12, mtnWall13, mtnWall14, mtnWall15, mtnWall16, mtnWall17, mtnWall18, mtnWall19, mtnWall20, mtnWall21, mtnWall22;
      
      public Assets()
      {
          loader = new ImageLoader();
          
          tileImage = loader.load("/tileSheet.png");
-         playerImage = loader.load("/newSpriteSheet1.png");
+         playerImage = loader.load("/newSpriteSheet11.png");
          npcImage = loader.load("/npcSpriteSheet.png");
          menuImage = loader.load("/menu.png");
          itemImage = loader.load("/itemMenu.png");
@@ -105,13 +107,30 @@ public class Assets
          mtnTileRtTp = sheet.crop(9, 5, 32, 32);
          mtnTileLtTp = sheet.crop(7, 5, 32, 32);
          mtnCave = sheet.crop(6, 6, 32, 32);
-     }
-     
-     
-     
-     //MAKE TOWN TILE AT LEAST 64X64
-     
-     
+         mtnWall = sheet.crop(5, 6, 32, 32);
+         mtnWall1 = sheet.crop(5, 7, 32, 32);
+         mtnWall2 = sheet.crop(6, 7, 32, 32);
+         mtnWall3 = sheet.crop(7, 7, 32, 32);
+         mtnWall4 = sheet.crop(8, 7, 32, 32);
+         mtnWall5 = sheet.crop(9, 7, 32, 32);
+         mtnWall6 = sheet.crop(3, 8, 32, 32);
+         mtnWall7 = sheet.crop(4, 8, 32, 32);
+         mtnWall8 = sheet.crop(5, 8, 32, 32);
+         mtnWall9 = sheet.crop(6, 8, 32, 32);
+         mtnWall10 = sheet.crop(7, 8, 32, 32);
+         mtnWall11 = sheet.crop(8, 8, 32, 32);
+         mtnWall12 = sheet.crop(9, 8, 32, 32);
+         mtnWall13 = sheet.crop(0, 9, 32, 32);
+         mtnWall14 = sheet.crop(1, 9, 32, 32);
+         mtnWall15 = sheet.crop(2, 9, 32, 32);
+         mtnWall16 = sheet.crop(3, 9, 32, 32);
+         mtnWall17 = sheet.crop(4, 9, 32, 32);
+         mtnWall18 = sheet.crop(5, 9, 32, 32);
+         mtnWall19 = sheet.crop(6, 9, 32, 32);
+         mtnWall20 = sheet.crop(7, 9, 32, 32);
+         mtnWall21 = sheet.crop(8, 9, 32, 32);
+         mtnWall22 = sheet.crop(9, 9, 32, 32);
+     }     
      
      public void setPlayerImage()
      {
@@ -135,7 +154,6 @@ public class Assets
          npcDn = npcSheet.crop(0, 0, 32, 32);
          npcLt = npcSheet.crop(1, 1, 32, 32);
          npcRt = npcSheet.crop(1, 0, 32, 32);
-     }
-     
+     }    
 }
 
