@@ -41,7 +41,7 @@ public class Transition
                 Game.wMapX = -898;
                 Game.wMapY = -784;
             }
-            if(Game.dMapX <= -608 && Game.dMapX >= -672 && Game.dMapY < -Game.dungeonMap.dsy + 32)
+            if(Game.dMapX <= -608 && Game.dMapX >= -672 && Game.dMapY < -Game.dungeonMap.dsy + Game.HEIGHT + 32)
             {
                 Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
                 Game.wMapX = -96;
