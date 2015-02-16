@@ -33,21 +33,14 @@ public class Transition
             }
             
         }
-        if(Game.stateEngine.state != StateEngine.GameState.STATE_WORLD)
+        if(Game.stateEngine.state != StateEngine.GameState.STATE_WORLD && Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
         {
             if(Game.mapX >= 287 && Game.mapY >= -34 && Game.mapY <= -30)
             {
                 Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
                 Game.wMapX = -898;
                 Game.wMapY = -784;
-            }
-            if(Game.dMapX <= -608 && Game.dMapX >= -672 && Game.dMapY < -Game.dungeonMap.dsy + Game.HEIGHT + 32)
-            {
-                Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
-                Game.wMapX = -96;
-                Game.wMapY = -116;
-            }
-            
+            }          
         }
         if(Game.stateEngine.state != StateEngine.GameState.STATE_SHOP)
         {
@@ -66,6 +59,15 @@ public class Transition
                 Game.stateEngine.state = StateEngine.GameState.STATE_TOWN;
                 Game.player.x = Game.WIDTH - 32;
                 Game.player.y = Game.HEIGHT - 32;
+            }
+        }
+        if(Game.stateEngine.state == StateEngine.GameState.STATE_DUNGEON)
+        {
+            if(Game.dMapX <= -608 && Game.dMapX >= -672 && Game.dMapY < -Game.dungeonMap.dsy + Game.HEIGHT + 32 && Game.stateEngine.state != StateEngine.GameState.STATE_WORLD)
+            {
+                Game.stateEngine.state = StateEngine.GameState.STATE_WORLD;
+                Game.wMapX = -96;
+                Game.wMapY = -116;
             }
         }
     }   

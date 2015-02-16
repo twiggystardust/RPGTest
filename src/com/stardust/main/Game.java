@@ -167,18 +167,18 @@ public class Game extends Canvas implements Runnable
                 player.render(g);
                 break;
             }
-            case STATE_DUNGEON:
-            {
-                dungeonMap.render(g);
-                player.render(g);
-                break;
-            }
             case STATE_TOWN:
             {
                 tileMap.render(g);
                 layer2.render(g);
                 layer3.render(g);
                 npc.render(g);
+                player.render(g);
+                break;
+            }
+            case STATE_DUNGEON:
+            {
+                dungeonMap.render(g);
                 player.render(g);
                 break;
             }
@@ -306,20 +306,21 @@ public class Game extends Canvas implements Runnable
         dialog = new DialogLoader("res/dialog.txt");
         stats.fileReader();
         dialog.fileReader();
+        dungeonMap = new TileMap(mapX, mapY, "res/dungeonMap.txt", 34);
         tileMap = new TileMap(mapX, mapY, "res/tileMap3.txt", 32);
         layer2 = new TileMap(mapX, mapY, "res/newLayer2.txt", 32);
         layer3 = new TileMap(mapX, mapY, "res/newLayer3.txt", 32);
         world = new TileMap(wMapX, wMapY, "res/worldMap.txt", 50);
         worldLyr2 = new TileMap(wMapX, wMapY, "res/worldLayer2.txt", 50);
         shopMap = new TileMap(sMapX, sMapY, "res/shopMap.txt", 20);
-        dungeonMap = new TileMap(mapX, mapY, "res/dungeonMap.txt", 34);
+        dungeonMap.fileParser();
         tileMap.fileParser();
         layer2.fileParser();
         layer3.fileParser();
         world.fileParser();
         worldLyr2.fileParser();
         shopMap.fileParser();
-        dungeonMap.fileParser();
+        
         
         
         player = new Player(HEIGHT - 32, WIDTH - 32, 32, 32);

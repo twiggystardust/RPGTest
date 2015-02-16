@@ -217,7 +217,7 @@ public class TileMap
        BufferedReader in = new BufferedReader(new FileReader(fileName));
        
        String line;           
-       if(numTiles == TILE_SIZE && Game.stateEngine.state == StateEngine.GameState.STATE_TOWN)
+       if(numTiles == TILE_SIZE)
        {
             while((line = in.readLine()) != null)
             {
